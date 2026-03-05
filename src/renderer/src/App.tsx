@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react'
+import type { ClaudeFile } from './types/claude-file'
 
 function App(): JSX.Element {
   const [ipcResult, setIpcResult] = useState<string>('')
+  const [globalFiles, setGlobalFiles] = useState<ClaudeFile[]>([])
 
   useEffect(() => {
     window.api.ping().then(setIpcResult).catch(() => setIpcResult('IPC not available'))
+    window.api.files.scanGlobal().then(setGlobalFiles).catch(console.error)
   }, [])
+
+  const existingFiles = globalFiles.filter((f) => f.status === 'exists')
+  const missingFiles = globalFiles.filter((f) => f.status === 'missing')
 
   return (
     <div className="h-full flex flex-col">
@@ -15,8 +21,8 @@ function App(): JSX.Element {
       </div>
 
       {/* Main content */}
-      <div className="flex-1 flex items-center justify-center">
-        <div className="text-center space-y-6">
+      <div className="flex-1 flex items-center justify-center overflow-auto">
+        <div className="text-center space-y-6 max-w-2xl px-8">
           {/* Logo / Hero */}
           <div className="w-20 h-20 mx-auto rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
             <svg
@@ -50,6 +56,46 @@ function App(): JSX.Element {
               {ipcResult || 'Connecting...'}
             </span>
           </div>
+
+          {/* File scan results */}
+          {globalFiles.length > 0 && (
+            <div className="text-left space-y-4 mt-8">
+              <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider">
+                Global Files ({existingFiles.length} found, {missingFiles.length} missing)
+              </h3>
+              <div className="space-y-2">
+                {globalFiles.map((file) => (
+                  <div
+                    key={file.id}
+                    className="flex items-center gap-3 px-4 py-3 rounded-lg bg-card border border-border"
+                  >
+                    <div
+                      className={`w-2 h-2 rounded-full ${
+                        file.status === 'exists'
+                          ? 'bg-success'
+                          : file.status === 'empty'
+                            ? 'bg-warning'
+                            : 'bg-muted-foreground/30'
+                      }`}
+                    />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-foreground">{file.displayName}</p>
+                      <p className="text-xs text-muted-foreground truncate">{file.absolutePath}</p>
+                    </div>
+                    <span
+                      className={`text-xs px-2 py-0.5 rounded-full ${
+                        file.status === 'exists'
+                          ? 'bg-success/10 text-success'
+                          : 'bg-muted text-muted-foreground'
+                      }`}
+                    >
+                      {file.status}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
