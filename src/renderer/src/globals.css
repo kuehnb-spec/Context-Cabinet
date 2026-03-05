@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0C1120;
+  --color-foreground: #E8ECF4;
+  --color-card: #151D2E;
+  --color-card-foreground: #E8ECF4;
+  --color-popover: #151D2E;
+  --color-popover-foreground: #E8ECF4;
+  --color-primary: #3A82FF;
+  --color-primary-foreground: #FFFFFF;
+  --color-secondary: #1A2540;
+  --color-secondary-foreground: #E8ECF4;
+  --color-muted: #1E2840;
+  --color-muted-foreground: #7A8BA0;
+  --color-accent: #3A82FF;
+  --color-accent-foreground: #FFFFFF;
+  --color-destructive: #EF4444;
+  --color-destructive-foreground: #FFFFFF;
+  --color-border: #243044;
+  --color-input: #243044;
+  --color-ring: #3A82FF;
+  --color-surface-elevated: #1A2540;
+
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* Glass effects */
+.glass {
+  background: rgba(21, 29, 46, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(58, 130, 255, 0.15);
+}
+
+.glass-subtle {
+  background: rgba(21, 29, 46, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Base styles */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #0C1120;
+  color: #E8ECF4;
+  font-family: var(--font-sans);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Draggable title bar region */
+.drag-region {
+  -webkit-app-region: drag;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* Selection colors */
+::selection {
+  background: rgba(58, 130, 255, 0.3);
+  color: #FFFFFF;
+}

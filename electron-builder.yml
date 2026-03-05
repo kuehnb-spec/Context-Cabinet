@@ -1,0 +1,19 @@
+appId: com.contextcabinet.app
+productName: Context Cabinet
+directories:
+  buildResources: resources
+files:
+  - '!**/.vscode/*'
+  - '!src/*'
+  - '!electron.vite.config.*'
+  - '!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc,.gitignore}'
+  - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
+mac:
+  entitlementsInherit: build/entitlements.mac.plist
+  target:
+    - dmg
+    - zip
+  category: public.app-category.developer-tools
+  artifactName: '${productName}-${version}-${arch}.${ext}'
+dmg:
+  artifactName: '${productName}-${version}.${ext}'
