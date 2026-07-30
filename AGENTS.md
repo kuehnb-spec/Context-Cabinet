@@ -13,8 +13,7 @@ Two display modes: **Complete Mode** (dark navy, sidebar nav, full feature set) 
 ## Source of truth
 
 1. **[README.md](README.md)** — features, tech stack, getting started, project structure.
-2. **[CLAUDE.md](CLAUDE.md)** — project rules, design pillars, hard constraints. **Read in full before making changes.**
-3. **Vault page:** `wiki/projects/context-cabinet` in the Obsidian vault.
+2. **Vault page:** `wiki/projects/context-cabinet` in the Obsidian vault.
 
 ## Tech stack
 
@@ -57,3 +56,7 @@ npm run package   # package as macOS app
 
 - Context Cabinet operates on Claude config files used by every other code project in `~/Projects/`. Be careful when editing config files in ways that could affect ongoing work elsewhere.
 - The `templates/` directory in `~/Projects/project-sync-toolkit/` includes templates relevant to knowledge-work repos that Context Cabinet may want to surface.
+
+## Project summary
+
+An Electron + React + TypeScript app for discovering, viewing, editing, and understanding Claude Code configuration files across global and project scopes. macOS-only. Tailwind CSS 4, CodeMirror 6, Zustand.
